@@ -1,9 +1,4 @@
-package com.kun;
-
-/**
- * @author: jzhangkun
- * @since: 1.0
- */
+package com.kun.client;
 
 // Download Java Driver: http://search.maven.org/#artifactdetails|org.neo4j.driver|neo4j-java-driver|1.0.0|jar
 
@@ -13,6 +8,11 @@ import static org.neo4j.driver.v1.Values.parameters;
 import java.util.List;
 import static java.util.Arrays.asList;
 import static java.util.Collections.singletonMap;
+
+/**
+ * @author: jzhangkun
+ * @since: 1.0
+ */
 
 public class BlankSandbox {
 
