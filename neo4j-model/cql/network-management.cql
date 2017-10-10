@@ -54,7 +54,7 @@ MATCH (rack:Rack)-[:HOLDS]->(s:Switch)-[:ROUTES]->(si:Interface)
 UNWIND (range(1,machines)) AS machineid
 
 CREATE (rack)-[:HOLDS]->(m:Machine {id:rack.id * 1000 + machineid, name: rack.name + "-M-" +machineid })-[:ROUTES]->(i:Interface {ip:s.ip+"."+machineid})-[:CONNECTS]->(si)
-WITH m,types,size(types)-toInteger(log(machines - machineid + 1)) -1 as idx
+WITH m,types,size(types)-toInt(log(machines - machineid + 1)) -1 as idx
 WITH m, types[idx] as t
 CREATE (m)-[:TYPE]->(t);
 
@@ -115,9 +115,9 @@ WITH [(:Software:OS)-[:VERSION]->(v) | v] as osVersions
 MATCH (a:Application:Software)
 WITH osVersions, collect(a) as apps
 MATCH (m:Machine)-[:ROUTES]->(i:Interface)
-WITH m,i, osVersions[toInteger(rand()*size(osVersions))] as os, apps[toInteger(rand()*size(apps))] as app
+WITH m,i, osVersions[toInt(rand()*size(osVersions))] as os, apps[toInteger(rand()*size(apps))] as app
 CREATE (m)-[:RUNS]->(op:OS:Process {name:os.name, startTime:timestamp() - toInteger( (rand() * 10 + 5) *24*3600*1000)})-[:INSTANCE]->(os)
-CREATE (m)-[:RUNS]->(ap:Application:Process {name: app.name, pid: toInteger(rand()*10000), startTime:timestamp() - toInteger(rand() * 10*24*3600*1000) })-[:INSTANCE]->(app)
+CREATE (m)-[:RUNS]->(ap:Application:Process {name: app.name, pid: toInt(rand()*10000), startTime:timestamp() - toInteger(rand() * 10*24*3600*1000) })-[:INSTANCE]->(app)
 
 FOREACH (portNo in app.ports |
    MERGE (port:Port {port:portNo})<-[:EXPOSES]-(i)
@@ -125,7 +125,7 @@ FOREACH (portNo in app.ports |
 )
 WITH *
 MATCH (app)-[:DEPENDS_ON]->(dep)
-CREATE (m)-[:RUNS]->(dp:Service:Process {name: dep.name, pid: toInteger(rand()*10000), startTime:timestamp() - toInteger(rand() * 10*24*3600*1000) })-[:INSTANCE]->(dep)
+CREATE (m)-[:RUNS]->(dp:Service:Process {name: dep.name, pid: toInt(rand()*10000), startTime:timestamp() - toInteger(rand() * 10*24*3600*1000) })-[:INSTANCE]->(dep)
 CREATE (ap)-[:DEPENDS_ON]->(dp)
 FOREACH (portNo in dep.ports |
    MERGE (port:Port {port:portNo})<-[:EXPOSES]-(i)
