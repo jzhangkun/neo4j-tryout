@@ -7,5 +7,5 @@ Refer to https://github.com/neo4j-contrib/sandbox-guides
 # Dump from Neo4j Sandbox
 setups sample data demoed by neo4j
 
-## clone the above sanbox guides repository
+## clone the above sanbox guides com.kun.neo4j.springboot.repository
 ## dump the cql file into local database

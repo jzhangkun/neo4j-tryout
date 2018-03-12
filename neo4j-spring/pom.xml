@@ -7,24 +7,53 @@
     <groupId>com.kun.neo4j</groupId>
     <artifactId>neo4j-spring</artifactId>
     <version>1.0-SNAPSHOT</version>
-
     <properties>
-        <java.version>1.8</java.version>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <neo4j.version>3.3.3</neo4j.version>
         <spring.version>5.0.4.RELEASE</spring.version>
+        <neo4j.version>3.3.3</neo4j.version>
+        <neo4j.ogm.version>3.1.0</neo4j.ogm.version>
     </properties>
-
     <dependencies>
-
-        <!-- other dependency elements omitted -->
+        <!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-neo4j -->
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-neo4j</artifactId>
             <version>${spring.version}</version>
         </dependency>
+
+       <dependency>
+            <groupId>org.neo4j</groupId>
+            <artifactId>neo4j-ogm-core</artifactId>
+            <version>${neo4j.ogm.version}</version>
+            <scope>compile</scope>
+        </dependency>
+
+        <!-- Only add if you're using the HTTP driver -->
+        <!--
+        <dependency>
+            <groupId>org.neo4j</groupId>
+            <artifactId>neo4j-ogm-http-driver</artifactId>
+            <version>${neo4j.ogm.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        -->
+
+        <!-- Only add if you're using the Embedded driver -->
+        <dependency>
+            <groupId>org.neo4j</groupId>
+            <artifactId>neo4j-ogm-embedded-driver</artifactId>
+            <version>${neo4j.ogm.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!-- Only add if you're using the Bolt driver -->
+        <!--
+        <dependency>
+            <groupId>org.neo4j</groupId>
+            <artifactId>neo4j-ogm-bolt-driver</artifactId>
+            <version>${neo4j.ogm.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+        -->
 
         <dependency>
             <groupId>org.neo4j.test</groupId>
@@ -38,6 +67,5 @@
             <version>${spring.version}</version>
             <scope>test</scope>
         </dependency>
-
     </dependencies>
 </project>
