@@ -13,6 +13,8 @@ public class MyFriendService {
 
     @Transactional
     public void doWork() {
+        // clean whole and build again
+        personRepository.deleteAll();
 
         Person jon  = new Person("Jon");
         Person emil = new Person("Emil");
@@ -25,13 +27,13 @@ public class MyFriendService {
         personRepository.save(emil);
 
         for (Person friend : emil.getFriends()) {
-            System.out.println("Friend: " + friend);
+            System.out.println("Email's friend: " + friend);
         }
 
         // Control loading depth
         //Person thatSamejon = personRepository.findOne(id, 2);
-        for (Person friend : jon.getFriends()) {
-            System.out.println("Jon's friends to depth 2: " + friend);
-        }
+        System.out.println("All the person");
+        personRepository.findAll().forEach(p -> {System.out.println(p);});
     }
+
 }
