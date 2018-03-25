@@ -1,7 +1,7 @@
 package com.kun.neo4j.spring.domain;
-import com.google.common.collect.Sets;
 import org.neo4j.ogm.annotation.*;
 import org.neo4j.ogm.annotation.NodeEntity;
+import com.google.common.collect.Sets;
 import java.util.Set;
 
 @NodeEntity
@@ -21,7 +21,10 @@ public class Person {
         return friends;
     }
 
-    public void knows(Person friend) { friends.add(friend); }
+    public void knows(Person friend) {
+        friends.add(friend);
+        friend.getFriends().add(this);
+    }
 
     @Override
     public String toString() {
