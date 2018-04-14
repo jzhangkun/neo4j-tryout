@@ -10,12 +10,14 @@ import org.springframework.data.neo4j.repository.config.EnableNeo4jRepositories;
 import org.springframework.data.neo4j.transaction.Neo4jTransactionManager;
 import org.springframework.data.web.config.EnableSpringDataWebSupport;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 
 @Configuration
 @EnableTransactionManagement
 @ComponentScan("com.kun.neo4j.spring")
 @EnableNeo4jRepositories(basePackages = "com.kun.neo4j.spring.repository")
+@EnableWebMvc
 public class Application {
 
     @Bean

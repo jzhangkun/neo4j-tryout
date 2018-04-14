@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 public class MyFriendService {
     @Autowired
@@ -34,6 +36,9 @@ public class MyFriendService {
         //Person thatSamejon = personRepository.findOne(id, 2);
         System.out.println("All the person");
         personRepository.findAll().forEach(p -> {System.out.println(p);});
+
+        Person find_jon = personRepository.findByName("Jon");
+        System.out.println("retrieved jon - " + find_jon);
     }
 
 }

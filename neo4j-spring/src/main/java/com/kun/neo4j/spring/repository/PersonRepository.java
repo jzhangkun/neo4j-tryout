@@ -9,7 +9,7 @@ import java.util.List;
 @Repository
 public interface PersonRepository extends Neo4jRepository<Person, Long> {
 
-    List<Person> findByName(String name);
+    Person findByName(String name);
 
     List<Person> findByNameLike(String name);
 }
